@@ -111,9 +111,7 @@ isPrefixOf' (x:xs) (y:ys) = x == y && isPrefixOf' xs ys
 isSuffixOf' :: Eq a => [a] -> [a] -> Bool
 isSuffixOf' _ [] = True
 isSuffixOf' [] _ = False
-isSuffixOf' l ls@(_:t) = l == ls || isSuffixOf' l t 
-
-{-@ significa "também se chama por" logo diz que ls é uma lista que acrescenta um sufixo-}
+isSuffixOf' l ls@(_:t) = l == ls || isSuffixOf' l t
 
 --exercício 18
 
@@ -176,8 +174,6 @@ unwords' :: [String] -> String
 unwords' [] = ""
 unwords' (x:xs) = x ++ (if xs == [] then "" else " ") ++ unwords' xs
 
-{-o segundo "" tem um espaço dentro para as strings não ficarem juntas-}
-
 --exercício 27
 
 unlines' :: [String] -> String
@@ -191,8 +187,6 @@ pMaior [a] = 0
 pMaior (x:xs) | x > (xs !! l) = 0
               | otherwise = 1 + l
               where l = pMaior xs
-
-{-(!!) função predefinida anteriormente no exercício 4-}
 
 --exercício 29
 
@@ -286,9 +280,7 @@ partitionEithers' [] = ([],[])
 partitionEithers' ((Left a):xs) = (a:as,bs)
     where (as,bs) = partitionEithers' xs
 partitionEithers' ((Right b):xs) = (as,b:bs)
-    where (as,bs) = partitionEithers' xs  
-
-{-ainda não demos isso definitivamente mas se forem ver ao Prelude a função partition EIthers chegais lá-}
+    where (as,bs) = partitionEithers' xs
 
 --exercício 43
 
@@ -332,8 +324,6 @@ data Posicao = Pos Int Int deriving Show
 maisCentral :: [Posicao] -> Posicao
 maisCentral = foldl1 (\(Pos xa ya) (Pos x y) -> if (xa^2 + ya^2) > (x^2 + y^2) then (Pos x y) else (Pos xa ya))
 
-{-função foldl1 é a função foldl(fold à esquerda, l de left) mas só do 1 par-}
-
 --exercício 48
 
 vizinhos :: Posicao -> [Posicao] -> [Posicao]
@@ -351,7 +341,3 @@ data Semaforo = Verde | Amarelo | Vermelho deriving Show
 
 interseccaoOK :: [Semaforo] -> Bool
 interseccaoOK ss = length [s | s <- ss, case s of Vermelho -> False; otherwise -> True] < 2
-
-{-diz que só existe 2 semáforos (lenght <2) mas que apesar de ter a mesma variável s 
-são diferentes e em caso de o primeiro ser vermelho então não pode passar se for o segundo
-já está autorizado a passar. -}
