@@ -8,7 +8,6 @@ typedef struct {
     Node* start;
     Node* end;
     int size;
-    int boolean;
 } Deque;
 
 Deque* create();
@@ -25,9 +24,7 @@ int size(Deque* deque);
 
 bool isEmpty(Deque* deque);
 
-void reverse1(Deque* deque);
-
-void reverse2(Deque* deque);
+void reverse(Deque* deque);
 
 void printDeque(Deque* deque, void(*printFunc)(void*));
 
