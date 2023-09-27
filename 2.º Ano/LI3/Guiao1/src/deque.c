@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#
 
 
 Deque* create(){
@@ -11,7 +10,7 @@ Deque* create(){
     d->start = NULL;
     d->end = NULL;
     d->size = 0;
-    return d;
+    return;
 }
 
 void push(Deque* deque, void* data){

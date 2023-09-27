@@ -1,15 +1,15 @@
 CC=gcc
-CFLAGS=-c -g -Wall
+CFLAGS=-c -g -Wall -Iinclude
 LDFLAGS=
 
-deque: src/deque.o src/node.o src/main.o 
-	$(CC) $(LDFLAGS) $^ -o deque 
+SOURCES=$(wildcard src/*.c)
+OBJECTS=$(patsubst src/%.c, obj/%.o, $(SOURCES))
 
-src/deque.o: src/deque.c
+deque: $(OBJECTS)
+	$(CC) $(LDFLAGS) $^ -o $@
 
-src/node.o: src/node.c
+obj/%.o: src/%.c
+	$(CC) $(CFLAGS) $< -o $@
 
-src/main.o: src/main.c
-
-clean: 
-	rm src/deque.o src/node.o src/main.o
+clean:
+	rm -f obj/%.o deque
