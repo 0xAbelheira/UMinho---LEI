@@ -10,7 +10,7 @@ Deque* create(){
     d->start = NULL;
     d->end = NULL;
     d->size = 0;
-    return;
+    return d; 
 }
 
 void push(Deque* deque, void* data){
